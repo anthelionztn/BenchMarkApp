@@ -25,7 +25,7 @@ class Figure_Canvas():   # 通过继承FigureCanvas类，使得该类既是一�
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
         if x_discrete:
-            plt.xticks(data_x, data_x, rotation=45, fontproperties=self.chFont, fontsize=7)
+            plt.xticks(data_x, data_x, rotation=45, fontproperties=self.chFont, fontsize=self.fontSize)
         if y_discrete:
-            plt.yticks(data_y, data_y, fontproperties=self.chFont, fontsize=7)
+            plt.yticks(data_y, data_y, fontproperties=self.chFont, fontsize=self.fontSize)
         plt.show()

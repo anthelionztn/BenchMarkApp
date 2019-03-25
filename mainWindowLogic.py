@@ -231,5 +231,3 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
                                                                     "Excel Files (*.xlsx)")
             self.result_reindex.to_excel(fileName_choose, index=False)
             QtWidgets.QMessageBox.about(self, '提示', '保存成功')
-
-

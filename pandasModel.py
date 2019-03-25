@@ -1,7 +1,9 @@
 from PyQt5 import QtCore
 import pandas as pd
+
+
 class PandasModel(QtCore.QAbstractTableModel):
-    def __init__(self, df = pd.DataFrame(), parent=None):
+    def __init__(self, df=pd.DataFrame(), parent=None):
         QtCore.QAbstractTableModel.__init__(self, parent=parent)
         self._df = df
 
@@ -12,13 +14,13 @@ class PandasModel(QtCore.QAbstractTableModel):
         if orientation == QtCore.Qt.Horizontal:
             try:
                 return self._df.columns.tolist()[section]
-            except (IndexError, ):
+            except (IndexError,):
                 return QtCore.QVariant()
         elif orientation == QtCore.Qt.Vertical:
             try:
                 # return self.df.index.tolist()
                 return self._df.index.tolist()[section]
-            except (IndexError, ):
+            except (IndexError,):
                 return QtCore.QVariant()
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
@@ -53,6 +55,6 @@ class PandasModel(QtCore.QAbstractTableModel):
     def sort(self, column, order):
         colname = self._df.columns.tolist()[column]
         self.layoutAboutToBeChanged.emit()
-        self._df.sort_values(colname, ascending= order == QtCore.Qt.AscendingOrder, inplace=True)
+        self._df.sort_values(colname, ascending=order == QtCore.Qt.AscendingOrder, inplace=True)
         self._df.reset_index(inplace=True, drop=True)
         self.layoutChanged.emit()

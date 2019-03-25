@@ -1,19 +1,21 @@
-#-*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 
 import matplotlib
+
 matplotlib.use("Qt5Agg")  # 声明使用QT5
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import platform
 
+
 class Figure_Canvas():
     label_x = ''
     label_y = ''
-    if platform.system()=="Windows":
+    if platform.system() == "Windows":
         chFont = fm.FontProperties(fname=r'C:\WINDOWS\Fonts\MSYH.TTC')  # Windows系统字体地址
         fontSize = 10
     else:
-        chFont = fm.FontProperties(fname='/System/Library/Fonts/STHeiti Light.ttc') # Mac OS系统字体地址
+        chFont = fm.FontProperties(fname='/System/Library/Fonts/STHeiti Light.ttc')  # Mac OS系统字体地址
         fontSize = 7
 
     def __init__(self, parent=None, width=12, height=9, dpi=100):

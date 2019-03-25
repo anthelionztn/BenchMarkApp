@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import platform
 
-class Figure_Canvas():   # 通过继承FigureCanvas类，使得该类既是一个PyQt5的Qwidget，又是一个matplotlib的FigureCanvas，这是连接pyqt5与matplot                                          lib的关键
+class Figure_Canvas():
     label_x = ''
     label_y = ''
     if platform.system()=="Windows":

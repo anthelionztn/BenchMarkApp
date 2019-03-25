@@ -47,6 +47,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.pushButton_insert.clicked.connect(self.insert)  #单击插入按钮插入新点
         self.comboBox_paraH.currentTextChanged.connect(self.disableLineEdit)
         self.comboBox_paraV.currentTextChanged.connect(self.disableLineEdit)
+        self.pushButton_export.clicked.connect(self.export)
 
 
 
@@ -218,3 +219,17 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
             else:
                 self.lineEditX.setEnabled(True)
                 self.lineEditY.setEnabled(True)
+
+    def export(self):   # 导出tableview中的查询结果到excel
+        if self.result_reindex.empty:
+            QtWidgets.QMessageBox.warning(self, '警告', '查询结果为空')
+            return
+        else:
+            fileName_choose, filetype = QtWidgets.QFileDialog.getSaveFileName(self,
+                                                                    "文件保存",
+                                                                    "/",  # 起始路径
+                                                                    "Excel Files (*.xlsx)")
+            self.result_reindex.to_excel(fileName_choose, index=False)
+            QtWidgets.QMessageBox.about(self, '提示', '保存成功')
+
+

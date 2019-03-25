@@ -140,10 +140,10 @@ class Ui_MainWindow(object):
         self.label_pointY.setGeometry(QtCore.QRect(410, 480, 101, 26))
         self.label_pointY.setObjectName("label_pointY")
         self.lineEditX = QtWidgets.QLineEdit(self.tab_visualization)
-        self.lineEditX.setGeometry(QtCore.QRect(495, 450, 251, 21))
+        self.lineEditX.setGeometry(QtCore.QRect(495, 450, 261, 21))
         self.lineEditX.setObjectName("lineEditX")
         self.lineEditY = QtWidgets.QLineEdit(self.tab_visualization)
-        self.lineEditY.setGeometry(QtCore.QRect(495, 480, 251, 21))
+        self.lineEditY.setGeometry(QtCore.QRect(495, 480, 261, 21))
         self.lineEditY.setObjectName("lineEditY")
         self.pushButton_insert = QtWidgets.QPushButton(self.tab_visualization)
         self.pushButton_insert.setGeometry(QtCore.QRect(670, 550, 80, 26))
@@ -161,7 +161,7 @@ class Ui_MainWindow(object):
         self.label_pointColor.setGeometry(QtCore.QRect(410, 510, 101, 26))
         self.label_pointColor.setObjectName("label_pointColor")
         self.comboBox_pointColor = QtWidgets.QComboBox(self.tab_visualization)
-        self.comboBox_pointColor.setGeometry(QtCore.QRect(490, 510, 261, 26))
+        self.comboBox_pointColor.setGeometry(QtCore.QRect(495, 510, 261, 26))
         self.comboBox_pointColor.setObjectName("comboBox_pointColor")
         self.comboBox_pointColor.addItem("")
         self.comboBox_pointColor.addItem("")
@@ -187,7 +187,7 @@ class Ui_MainWindow(object):
         self.actionb.setObjectName("actionb")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

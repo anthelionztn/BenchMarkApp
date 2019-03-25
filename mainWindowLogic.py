@@ -5,8 +5,10 @@
 from pandasModel import *
 from mainWindowUI import *
 from Figure_Canvas import *
-from PyQt5.Qt import QRegExpValidator
-from PyQt5.Qt import QRegExp
+# from PyQt5.Qt import QRegExpValidator
+# from PyQt5.Qt import QRegExp
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtCore import QRegExp
 
 
 class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
@@ -216,7 +218,3 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
             else:
                 self.lineEditX.setEnabled(True)
                 self.lineEditY.setEnabled(True)
-
-
-
-

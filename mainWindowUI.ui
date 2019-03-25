@@ -30,7 +30,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_query">
        <attribute name="title">
@@ -482,7 +482,7 @@
          <rect>
           <x>495</x>
           <y>450</y>
-          <width>251</width>
+          <width>261</width>
           <height>21</height>
          </rect>
         </property>
@@ -495,7 +495,7 @@
          <rect>
           <x>495</x>
           <y>480</y>
-          <width>251</width>
+          <width>261</width>
           <height>21</height>
          </rect>
         </property>
@@ -571,7 +571,7 @@
        <widget class="QComboBox" name="comboBox_pointColor">
         <property name="geometry">
          <rect>
-          <x>490</x>
+          <x>495</x>
           <y>510</y>
           <width>261</width>
           <height>26</height>

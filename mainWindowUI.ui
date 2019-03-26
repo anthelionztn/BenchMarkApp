@@ -542,19 +542,6 @@
          <string>纵轴刻度离散化</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_fit">
-        <property name="geometry">
-         <rect>
-          <x>190</x>
-          <y>550</y>
-          <width>80</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>拟合</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_pointColor">
         <property name="geometry">
          <rect>
@@ -626,6 +613,59 @@
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
+          <widget class="QLabel" name="label_fit">
+              <property name="geometry">
+                  <rect>
+                      <x>20</x>
+                      <y>550</y>
+                      <width>101</width>
+                      <height>26</height>
+                  </rect>
+              </property>
+              <property name="text">
+                  <string>拟合自由度：</string>
+              </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox_fit">
+              <property name="geometry">
+                  <rect>
+                      <x>100</x>
+                      <y>550</y>
+                      <width>171</width>
+                      <height>26</height>
+                  </rect>
+              </property>
+              <item>
+                  <property name="text">
+                      <string>1</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>2</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>3</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>4</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>5</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>6</string>
+                  </property>
+              </item>
+          </widget>
       </widget>
      </widget>
     </item>

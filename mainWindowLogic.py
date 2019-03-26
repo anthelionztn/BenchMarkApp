@@ -80,7 +80,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def clearAllCarItems(self):  # 清空全部已选车辆
         self.listWidget_carSelected.clear()
 
-    def getData(self, adr):
+    def getData(self, adr):  # 读取数据源文件中的数据和参数划分信息
         self.dataset = pd.read_excel(adr, sheet_name=0)
         self.catelist = pd.read_excel(adr, sheet_name=1)
         carList = self.dataset.iloc[:, 0].values
@@ -106,7 +106,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def clearAllParaItems(self):  # 清空全部已选参数
         self.listWidget_paraSelected.clear()
 
-    def quaryData(self):
+    def quaryData(self):  # 根据所选车型和参数查询数据
         if self.listWidget_carSelected.count() == 0:
             QtWidgets.QMessageBox.warning(self, '警告', '未选择对比车型')
         elif self.listWidget_paraSelected.count() == 0:
@@ -127,40 +127,49 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.comboBox_paraH.addItems(paraList[:])  # 将已选参数加入可视化界面的下拉菜单
             self.comboBox_paraV.addItems(paraList[:])  # 将已选参数加入可视化界面的下拉菜单
 
-    def itemToList(self, listwidget):
+    def itemToList(self, listwidget):  # 将listwidget中的item组合成一个list
         lst = []
         for i in range(listwidget.count()):
             lst.append(listwidget.item(i).text())
         return lst
 
-    def tabToggle(self):
+    def tabToggle(self):  # 切换选项卡
         if self.tabWidget.currentIndex() == 0:
             self.tabWidget.setCurrentIndex(1)
         else:
             self.tabWidget.setCurrentIndex(0)
 
-    def dataToTab(self, df):
+    def dataToTab(self, df):  # 将查询结果加载到tableView
         model = PandasModel(df)
         self.tableView.setModel(model)
 
-    def draw(self):
+    def draw(self):  # 根据所选横纵轴参数绘制散点图
         if self.comboBox_paraH.currentText() != '' and self.comboBox_paraV.currentText() != '':
-            plt.close()
+            plt.close()  # 关闭之前的figure
             label_x = self.comboBox_paraH.currentText()
             label_y = self.comboBox_paraV.currentText()
 
             x = self.result_reindex[label_x]
             y = self.result_reindex[label_y]
 
+            source_x = self.dataset[label_x]
+            source_y = self.dataset[label_y]
+            degree = int(self.comboBox_fit.currentText())
+
             dr = Figure_Canvas()
-            dr.plotScatter(x, y,
-                           label_x, label_y,
-                           self.checkBox_paraHdiscr.isChecked(), self.checkBox_paraVdiscr.isChecked(),
-                           'b', 'o')
+            if self.lineEditX.isEnabled() and self.lineEditY.isEnabled():
+                dr.plotScatterFit(x, y,
+                                  label_x, label_y,
+                                  'b', 'o', source_x, source_y, degree)
+            else:
+                dr.plotScatter(x, y,
+                               label_x, label_y,
+                               self.checkBox_paraHdiscr.isChecked(), self.checkBox_paraVdiscr.isChecked(),
+                               'b', 'o')
         else:
             QtWidgets.QMessageBox.warning(self, '警告', '请先进行查询操作')
 
-    def insert(self):
+    def insert(self):  # 根据选择的颜色绘制插入点
         if self.comboBox_paraH.currentText() != '' and self.comboBox_paraV.currentText() != '':
             plt.close()
             label_x = self.comboBox_paraH.currentText()
@@ -172,6 +181,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                          '洋红色': 'm',
                          '黄色': 'y',
                          '黑色': 'k'}
+            source_x = self.dataset[label_x]
+            source_y = self.dataset[label_y]
+            degree = int(self.comboBox_fit.currentText())
             newColor = colorDict[self.comboBox_pointColor.currentText()]
             x = self.result_reindex[label_x]
             y = self.result_reindex[label_y]
@@ -185,11 +197,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 newPointY = y.append(pd.Series(float(self.lineEditY.text())))
                 color = ['b'] * (len(x))
                 color.append(newColor)
-
-                dr.plotScatter(newPointX, newPointY,
-                               label_x, label_y,
-                               self.checkBox_paraHdiscr.isChecked(), self.checkBox_paraVdiscr.isChecked(),
-                               color, 'o')
+                dr.plotScatterFit(newPointX, newPointY,
+                                  label_x, label_y,
+                                  color, 'o', source_x, source_y, degree)
 
         else:
             QtWidgets.QMessageBox.warning(self, '警告', '请先进行查询操作')
@@ -224,5 +234,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                                               "文件保存",
                                                                               "/",  # 起始路径
                                                                               "Excel Files (*.xlsx)")
-            self.result_reindex.to_excel(fileName_choose, index=False)
-            QtWidgets.QMessageBox.about(self, '提示', '保存成功')
+            if fileName_choose != '':
+                self.result_reindex.to_excel(fileName_choose, index=False)
+                QtWidgets.QMessageBox.about(self, '提示', '保存成功')
+            else:
+                return

@@ -71,7 +71,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def addAllCartoList(self):  # 全选车辆，并将其全部加入左边已选车辆列表中
         self.clearAllCarItems()
-        self.listWidget_carSelected.addItems(self.dataset.iloc[:, 0].values)
+        if self.dataset.empty:
+            return
+        else:
+            self.listWidget_carSelected.addItems(self.dataset.iloc[:, 0].values)
 
     def delCarfromList(self, item):  # 删除已选车辆列表中的某一条数据
         self.listWidget_carSelected.removeItemWidget(
@@ -95,9 +98,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def addAllParatoList(self):  # 全选当前参数列表中的参数，并将其全部加入左边已选参数列表中
         self.clearAllParaItems()
-        # self.listWidget_paraSelected.addItems(self.dataset.columns.values.tolist())
-        for i in range(self.listWidget_paraList.count()):
-            self.listWidget_paraSelected.addItem(self.listWidget_paraList.item(i).text())
+        if self.dataset.empty:
+            return
+        else:
+            for i in range(self.listWidget_paraList.count()):
+                self.listWidget_paraSelected.addItem(self.listWidget_paraList.item(i).text())
 
     def delParafromList(self, item):  # 删除已选参数列表中的某一条数据
         self.listWidget_paraSelected.removeItemWidget(

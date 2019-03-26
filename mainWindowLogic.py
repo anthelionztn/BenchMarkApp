@@ -205,7 +205,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 dr.plotScatterFit(newPointX, newPointY,
                                   label_x, label_y,
                                   color, 'o', source_x, source_y, degree)
-
         else:
             QtWidgets.QMessageBox.warning(self, '警告', '请先进行查询操作')
 

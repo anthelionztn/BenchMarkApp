@@ -151,11 +151,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def draw(self):  # 根据所选横纵轴参数绘制散点图
         if self.comboBox_paraH.currentText() != '' and self.comboBox_paraV.currentText() != '':
             plt.close()  # 关闭之前的figure
+            plt.style.use("ggplot")
             label_x = self.comboBox_paraH.currentText()
             label_y = self.comboBox_paraV.currentText()
 
             x = self.result_reindex[label_x]
             y = self.result_reindex[label_y]
+            datalabel = self.result_reindex['车型']
 
             source_x = self.dataset[label_x]
             source_y = self.dataset[label_y]
@@ -163,11 +165,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             dr = Figure_Canvas()
             if self.lineEditX.isEnabled() and self.lineEditY.isEnabled():
-                dr.plotScatterFit(x, y,
+                dr.plotScatterFit(x, y, datalabel, self.checkBox_datalabel.isChecked(),
                                   label_x, label_y,
                                   'b', 'o', source_x, source_y, degree)
             else:
-                dr.plotScatter(x, y,
+                dr.plotScatter(x, y, datalabel, self.checkBox_datalabel.isChecked(),
                                label_x, label_y,
                                self.checkBox_paraHdiscr.isChecked(), self.checkBox_paraVdiscr.isChecked(),
                                'b', 'o')
@@ -177,6 +179,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def insert(self):  # 根据选择的颜色绘制插入点
         if self.comboBox_paraH.currentText() != '' and self.comboBox_paraV.currentText() != '':
             plt.close()
+            plt.style.use("ggplot")
             label_x = self.comboBox_paraH.currentText()
             label_y = self.comboBox_paraV.currentText()
             colorDict = {'蓝色': 'b',
@@ -192,6 +195,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             newColor = colorDict[self.comboBox_pointColor.currentText()]
             x = self.result_reindex[label_x]
             y = self.result_reindex[label_y]
+            datalabel = self.result_reindex['车型']
 
             dr = Figure_Canvas()
 
@@ -202,7 +206,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 newPointY = y.append(pd.Series(float(self.lineEditY.text())))
                 color = ['b'] * (len(x))
                 color.append(newColor)
-                dr.plotScatterFit(newPointX, newPointY,
+                dr.plotScatterFit(newPointX, newPointY, datalabel, self.checkBox_datalabel.isChecked(),
                                   label_x, label_y,
                                   color, 'o', source_x, source_y, degree)
         else:

@@ -22,11 +22,14 @@ class Figure_Canvas():
         fig = plt.figure(figsize=(width, height), dpi=80)
         self.axes = fig.subplots(1, 1)
 
-    def plotScatter(self, data_x, data_y, label_x, label_y, x_discrete, y_discrete, color, marker):
+    def plotScatter(self, data_x, data_y, datalabel, datalabelSelected, label_x, label_y, x_discrete, y_discrete, color,
+                    marker):
 
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
-
+        if datalabelSelected:
+            for x, y, z in zip(data_x, data_y, datalabel):
+                plt.text(x, y + 500, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         if x_discrete:  # 如果横轴离散化选中
             plt.xticks(data_x, data_x, rotation=45, fontproperties=self.chFont, fontsize=self.fontSize)
         if y_discrete:  # 如果纵轴离散化选中
@@ -35,13 +38,19 @@ class Figure_Canvas():
         plt.ylabel(label_y, fontproperties=self.chFont)
         plt.show()
 
-    def plotScatterFit(self, data_x, data_y, label_x, label_y, color, marker, source_x, source_y, degree):
+    def plotScatterFit(self, data_x, data_y, datalabel, datalabelSelected, label_x, label_y, color, marker, source_x,
+                       source_y, degree):
 
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
+        if datalabelSelected:
+            for x, y, z in zip(data_x, data_y, datalabel):
+                plt.text(x, y + 500, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         self.fit(source_x, source_y, degree)
         plt.xlabel(label_x, fontproperties=self.chFont)
         plt.ylabel(label_y, fontproperties=self.chFont)
+        plt.xlim((min(data_x) * 0.8, max(data_x) * 1.2))
+        plt.ylim((min(data_y) * 0.8, max(data_y) * 1.2))
         plt.show()
 
     def fit(self, source_x, source_y, degree):  # 根据所选自由度拟合多项式

@@ -532,7 +532,7 @@
        <widget class="QCheckBox" name="checkBox_paraVdiscr">
         <property name="geometry">
          <rect>
-          <x>240</x>
+             <x>220</x>
              <y>450</y>
           <width>120</width>
           <height>26</height>
@@ -665,6 +665,19 @@
                       <string>6</string>
                   </property>
               </item>
+          </widget>
+          <widget class="QCheckBox" name="checkBox_datalabel">
+              <property name="geometry">
+                  <rect>
+                      <x>340</x>
+                      <y>450</y>
+                      <width>120</width>
+                      <height>26</height>
+                  </rect>
+              </property>
+              <property name="text">
+                  <string>数据标签</string>
+              </property>
           </widget>
       </widget>
      </widget>

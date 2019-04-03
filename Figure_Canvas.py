@@ -28,8 +28,9 @@ class Figure_Canvas():
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
         if datalabelSelected:
+            offset = (max(data_y) - min(data_y)) * 0.03
             for x, y, z in zip(data_x, data_y, datalabel):
-                plt.text(x, y + 500, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
+                plt.text(x, y + offset, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         if x_discrete:  # 如果横轴离散化选中
             plt.xticks(data_x, data_x, rotation=45, fontproperties=self.chFont, fontsize=self.fontSize)
         if y_discrete:  # 如果纵轴离散化选中
@@ -44,8 +45,9 @@ class Figure_Canvas():
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
         if datalabelSelected:
+            offset = (max(data_y) - min(data_y)) * 0.03
             for x, y, z in zip(data_x, data_y, datalabel):
-                plt.text(x, y + 500, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
+                plt.text(x, y + offset, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         self.fit(source_x, source_y, degree)
         plt.xlabel(label_x, fontproperties=self.chFont)
         plt.ylabel(label_y, fontproperties=self.chFont)

@@ -129,6 +129,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.comboBox_paraV.clear()
             self.comboBox_paraH.addItems(paraList[:])  # 将已选参数加入可视化界面的下拉菜单
             self.comboBox_paraV.addItems(paraList[:])  # 将已选参数加入可视化界面的下拉菜单
+            self.checkBox_datalabel.setChecked(False)  # 默认不选中数据标签
 
     def itemToList(self, listwidget):  # 将listwidget中的item组合成一个list
         lst = []

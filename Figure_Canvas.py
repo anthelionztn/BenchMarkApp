@@ -28,7 +28,7 @@ class Figure_Canvas():
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
         if datalabelSelected:
-            offset = (max(data_y) - min(data_y)) * 0.03
+            offset = (max(data_y) - min(data_y)) * 0.01
             for x, y, z in zip(data_x, data_y, datalabel):
                 plt.text(x, y + offset, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         if x_discrete:  # 如果横轴离散化选中
@@ -45,7 +45,7 @@ class Figure_Canvas():
         plt.title(label_x + " vs " + label_y, fontproperties=self.chFont)
         plt.scatter(data_x, data_y, c=color, marker=marker)
         if datalabelSelected:
-            offset = (max(data_y) - min(data_y)) * 0.03
+            offset = (max(data_y) - min(data_y)) * 0.01
             for x, y, z in zip(data_x, data_y, datalabel):
                 plt.text(x, y + offset, z, ha='center', va='bottom', fontproperties=self.chFont, fontsize=self.fontSize)
         self.fit(source_x, source_y, degree)

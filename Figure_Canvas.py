@@ -58,4 +58,10 @@ class Figure_Canvas():
     def fit(self, source_x, source_y, degree):  # 根据所选自由度拟合多项式
         z = np.polyfit(source_x, source_y, degree)
         p = np.poly1d(z)  # 生成多项式对象
+        yhat = p(source_x)
+        ybar = np.sum(source_y) / len(source_y)
+        ssreg = np.sum((yhat - ybar) ** 2)
+        sstot = np.sum((source_y - ybar) ** 2)
+        r2_score = 'R2 = ' + str(ssreg / sstot)
+        plt.legend((r2_score,), loc='best', frameon=False)
         plt.plot(sorted(source_x), p(sorted(source_x)), linestyle=':')
